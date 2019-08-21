@@ -8,7 +8,7 @@ module.exports = {
                     m.tahun as Release_date 
                 from movcat as mc 
                 join movies as m on mc.idmovie = m.id
-                join category as c on mc.idcategory = c.id;`
+                join categories as c on mc.idcategory = c.id;`
         
         mysql_conn.query(sql, (err, results) => {
             if (err) {
@@ -44,7 +44,7 @@ module.exports = {
                     m.tahun as Release_date 
                 from movcat as mc 
                 join movies as m on mc.idmovie = m.id
-                join category as c on mc.idcategory = c.id;`
+                join categories as c on mc.idcategory = c.id;`
             
             mysql_conn.query(sql, (err, results) => {
                 if (err) {
@@ -82,7 +82,7 @@ module.exports = {
                     m.tahun as Release_date 
                 from movcat as mc 
                 join movies as m on mc.idmovie = m.id
-                join category as c on mc.idcategory = c.id;`
+                join categories as c on mc.idcategory = c.id;`
 
                 mysql_conn.query(sql, (err, results) => {
                     if (err) {
@@ -105,7 +105,7 @@ module.exports = {
         })
     },
     getAllCategoryName: (req, res) => {
-        let sql = `select * from category`
+        let sql = `select * from categories`
         mysql_conn.query(sql, (err, results) => {
             if (err) {
                 return res.status(500).send({ status: err, error: err });

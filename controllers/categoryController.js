@@ -2,7 +2,7 @@ const mysql_conn = require('../database');
 
 module.exports = {
     getAllCat: (req, res) => {
-        let sql = `select * from category`
+        let sql = `select * from categories`
 
         mysql_conn.query(sql, (err, results) => {
             if (err) {
@@ -14,7 +14,7 @@ module.exports = {
     },
     addCategory: (req, res) => {
         let data = req.body
-        let sql = `select * from category where nama='${req.body.nama}'`;
+        let sql = `select * from categories where nama='${req.body.nama}'`;
         mysql_conn.query(sql, (err, results) => {
             if (err) {
                 return res.status(500).send({ status: err, error: err });
@@ -24,13 +24,13 @@ module.exports = {
                 return res.status(200).send({ status: "Duplicate Data", message: "Category sudah ada" });
             }
 
-            sql = `insert into category set ?`
+            sql = `insert into categories set ?`
             mysql_conn.query(sql, data, (err, results) => {
                 if (err) {
                     return res.status(500).send({ status: err, error: err });
                 }
 
-                sql = `select * from category`;
+                sql = `select * from categories`;
                 mysql_conn.query(sql, (err, results) => {
                     if (err) {
                         return res.status(500).send({ status: err, error: err });
@@ -43,7 +43,7 @@ module.exports = {
     },
     editCategory: (req, res) => {
         let data = req.body
-        let sql = `select * from category where nama = '${data.nama}'`
+        let sql = `select * from categories where nama = '${data.nama}'`
         mysql_conn.query(sql, (err, results) => {
             if (err) {
                 return res.status(500).send({ status: err, error: err });
@@ -53,13 +53,13 @@ module.exports = {
                 return res.status(200).send({ status: "Duplicate Data", message: "Category sudah ada" });
             }
 
-            sql = `update category set ? where id = ${req.params.id}`;
+            sql = `update categories set ? where id = ${req.params.id}`;
             mysql_conn.query(sql, data, (err, results) => {
                 if (err) {
                     return res.status(500).send({ status: err, error: err });
                 }
 
-                sql = `select * from category`;
+                sql = `select * from categories`;
                 mysql_conn.query(sql, (err, results) => {
                     if (err) {
                         return res.status(500).send({ status: err, error: err });
@@ -72,13 +72,13 @@ module.exports = {
     },
     deleteCategory: (req, res) => {
         let data = req.body
-        let sql = `delete from category where id = ${req.params.id}`;
+        let sql = `delete from categories where id = ${req.params.id}`;
         mysql_conn.query(sql, data, (err, results) => {
             if (err) {
                 return res.status(500).send({ status: err, error: err });
             }
 
-            sql = `select * from category`;
+            sql = `select * from categories`;
             mysql_conn.query(sql, (err, results) => {
                 if (err) {
                     return res.status(500).send({ status: err, error: err });
